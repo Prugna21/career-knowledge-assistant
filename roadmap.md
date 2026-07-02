@@ -2,11 +2,11 @@
 
 ## 🎯 Vision
 
-Build an AI-powered career assistant that behaves like a mini ATS + recruiter system.
+Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 1 – MVP (DONE)
+# Phase 1 – MVP
 
 ✔ CV loading (PDF)  
 ✔ Text chunking  
@@ -18,7 +18,7 @@ Build an AI-powered career assistant that behaves like a mini ATS + recruiter sy
 
 ---
 
-# Phase 2 – Semantic AI Upgrade (DONE)
+# Phase 2 – Semantic AI Upgrade
 
 ✔ Embedding-based semantic search  
 ✔ RAG-style retrieval system  
@@ -28,7 +28,7 @@ Build an AI-powered career assistant that behaves like a mini ATS + recruiter sy
 
 # Phase 3 – Product Features
 
-## Match Score Engine (DONE)
+## Match Score Engine
 ✔ CV vs Job similarity scoring (0–100)  
 ✔ Explanation of match quality  
 
