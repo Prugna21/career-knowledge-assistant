@@ -9,6 +9,7 @@ from cv_optimizer import build_cv_prompt
 from app_state import save_application, load_applications
 from cv_exporter import export_cv
 from semantic_search import build_index, search
+from match_engine import compute_match_score
 
 
 # -------------------
@@ -89,6 +90,12 @@ elif mode == "Job Analyse":
         if job_text.strip():
             st.write(ask_llm(build_job_prompt(cv_text, job_text)))
 
+    if st.button("Match Score berechnen"):
+        if job_text.strip():
+            score, explanation = compute_match_score(cv_text, job_text)
+            st.metric("CV Match Score", f"{score}/100")
+            st.write(explanation)
+
     if st.button("Diese Bewerbung speichern"):
         if job_text.strip():
             save_application({
@@ -96,7 +103,6 @@ elif mode == "Job Analyse":
                 "job_text": job_text
             })
             st.success("Bewerbung gespeichert")
-
 
 # -------------------
 # MODE 3

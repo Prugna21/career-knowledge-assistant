@@ -1,57 +1,96 @@
 # Career Knowledge Assistant
 
-## Überblick
-
-Der Career Knowledge Assistant ist ein persönliches AI-Tool zur Unterstützung bei Bewerbungen und Karriereplanung.
-
-Er nutzt lokale KI-Modelle und eigene Dokumente (CV, Stellenanzeigen), um Fragen zu beantworten, Jobs zu analysieren und Lebensläufe zu optimieren.
+AI-powered career assistant for CV analysis, job matching, CV optimization and match scoring.
 
 ---
 
-## Funktionen
+## 🚀 Features
 
-### 1. CV Q&A
-- Fragen zum eigenen Lebenslauf beantworten
-- z. B. Skills, Erfahrung, Ausbildung
+### 📄 CV Intelligence
+- Ask questions about your CV
+- Semantic search using embeddings
+- Context-aware AI answers
 
-### 2. Job Analyse
-- Vergleich von Lebenslauf und Stellenanzeige
-- Matching Score (0–100%)
-- Stärken & Lücken
+### 💼 Job Analysis
+- Analyze job descriptions vs CV
+- AI-generated structured feedback
 
-### 3. CV Optimierung
-- Lebenslauf wird auf Stellenanzeige angepasst
-- ATS-freundliche Struktur
+### 📊 CV Match Score (NEW)
+- Calculates similarity between CV and job
+- Score from 0–100
+- Human-readable explanation of fit quality
+
+### ✨ CV Optimization
+- Tailor CV to job descriptions
+- AI-generated improvements
+- Export optimized CV as PDF
+
+### 📦 Application Tracking
+- Save job applications
+- View history in sidebar
 
 ---
 
-## Tech Stack
+## 🧠 AI Architecture
+
+```
+PDF → Text → Chunking → Embeddings → Semantic Search → LLM
+                               ↓
+                      Match Score Engine
+```
+
+---
+
+## ⚙️ Tech Stack
 
 - Python
 - Streamlit
-- Ollama (lokales LLM)
-- PDF Parsing (pypdf)
-- Simple RAG Pipeline
+- Sentence Transformers (Embeddings)
+- Ollama / LLM API
+- NumPy
+- ReportLab (PDF export)
 
 ---
 
-## Architektur
+## ▶️ How to run
+
+```bash
+pip install -r requirements.txt
+streamlit run app/app_ui.py
+```
+
+---
+
+## 📁 Project Structure
 
 ```
-PDF → Text → Chunking → Suche → Prompt → LLM → Antwort
+app/
+  app_ui.py
+semantic_search.py
+match_engine.py
+pdf_reader.py
+text_splitter.py
+ai_engine.py
+job_analyzer.py
+cv_optimizer.py
+cv_exporter.py
+app_state.py
 ```
 
 ---
 
-## Ziel
+## 🎯 Current Status
 
-Dieses Projekt dient dazu:
-- praktische AI-Erfahrung zu sammeln
-- RAG-Systeme zu verstehen
-- ein echtes Portfolio-Projekt zu bauen
+✔ CV AI Assistant  
+✔ Job Analysis Engine  
+✔ Semantic Search (Embeddings)  
+✔ CV Optimization System  
+✔ Match Score Engine (0–100)  
+✔ Application Tracking  
+✔ PDF Export  
 
 ---
 
-## Status
+## 🚀 Next Steps
 
-🚧 In aktiver Entwicklung
+See 'roadmap.md'

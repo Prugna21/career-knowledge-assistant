@@ -1,109 +1,97 @@
 # Career Knowledge Assistant – Roadmap
 
-## 🎯 Ziel des Projekts
+## 🎯 Vision
 
-Ein AI-gestütztes Karriere-Tool, das:
-- Lebensläufe analysiert
-- Stellenanzeigen bewertet
-- CVs optimiert
-- Bewerbungen verwaltet
-
-Langfristig: kleines SaaS/Portfolio-Projekt mit AI-RAG-System.
+Build an AI-powered career assistant that behaves like a mini ATS + recruiter system.
 
 ---
 
-# 🟢 Phase 1 – MVP (Aktuell erreicht)
+# Phase 1 – MVP (DONE)
 
-## Funktionen
-- [x] CV PDF Laden
-- [x] Text Chunking
-- [x] CV Fragen beantworten (RAG light)
-- [x] Job Analyse mit LLM
-- [x] CV Optimierung für Stellenanzeigen
-- [x] Streamlit UI
-- [x] PDF Export für optimierten CV
-- [x] Bewerbungen speichern (JSON)
-
-## Status
-✔ funktional, aber noch einfache AI-Logik
+✔ CV loading (PDF)  
+✔ Text chunking  
+✔ Streamlit UI  
+✔ Job analysis  
+✔ CV optimization  
+✔ Application tracking  
+✔ PDF export  
 
 ---
 
-# 🟡 Phase 2 – AI Upgrade (Wichtigster Schritt)
+# Phase 2 – Semantic AI Upgrade (DONE)
 
-## Verbesserungen der Intelligenz
-- [ ] Semantic Search (Embeddings statt Keywords)
-- [ ] Relevanz Ranking für CV-Chunks
-- [ ] Besseres Context Selection System
-- [ ] Modellwechsel (Mistral / Llama 3 empfohlen)
-
-## Ergebnis
-→ deutlich bessere, intelligentere Antworten
+✔ Embedding-based semantic search  
+✔ RAG-style retrieval system  
+✔ Improved context handling  
 
 ---
 
-# 🟠 Phase 3 – Produkt Upgrade
+# Phase 3 – Product Features
 
-## Features
-- [ ] Bewerbungsstatus System
-  - Applied
-  - Interview
-  - Rejected
+## Match Score Engine (DONE)
+✔ CV vs Job similarity scoring (0–100)  
+✔ Explanation of match quality  
 
-- [ ] Job Dashboard
-- [ ] Filter & Suche für Bewerbungen
-- [ ] Mehrere CV Versionen speichern
-- [ ] Notizen pro Bewerbung
+## Next improvements:
+- [ ] Skill-based scoring (not just similarity)
+- [ ] Weighted evaluation (Experience / Skills / Education)
+- [ ] Skill gap detection
 
 ---
 
-# 🔵 Phase 4 – UX / UI Upgrade
-
-## Verbesserungen
-- [ ] Tabs statt Selectbox
-- [ ] schöneres Layout (Sidebar Navigation)
-- [ ] Loading States für AI Antworten
-- [ ] Ergebnis-Highlighting (Skills, Matches)
-- [ ] Dark Mode polish
+## Application System
+- [ ] Structured database (replace JSON)
+- [ ] Application statuses (Applied / Interview / Rejected)
+- [ ] Notes per application
 
 ---
 
-# 🟣 Phase 5 – Production / SaaS Level
-
-## Advanced Features
-- [ ] User Login System
-- [ ] Cloud Storage (statt JSON)
-- [ ] Datenbank (SQLite → Postgres)
-- [ ] API Layer (FastAPI optional)
-- [ ] Deployment (Streamlit Cloud / Render / Docker)
+## UI/UX Improvements
+- [ ] Better layout (tabs instead of selectbox)
+- [ ] Progress indicators for AI calls
+- [ ] Highlight matched skills
 
 ---
 
-# 🧠 Phase 6 – AI Advanced (Optional)
+# Phase 4 – Advanced AI Features
 
-## High-end Features
-- [ ] CV vs Job Match Score (0–100)
-- [ ] Skill Gap Detection
-- [ ] Auto Cover Letter Generator
-- [ ] Interview Question Generator
-- [ ] Multi-job comparison
-
----
-
-# 📌 Priorität
-
-## 🔥 Wichtigste nächste Schritte:
-1. Semantic Search (AI Upgrade)
-2. Better Job Matching Score
-3. Clean UI polish
+- [ ] Auto cover letter generation
+- [ ] Interview question generator
+- [ ] Job comparison system
+- [ ] Career path suggestions
+- [ ] Salary estimation insights
 
 ---
 
-# 🚀 Zielzustand
+# Phase 5 – SaaS Evolution
 
-Am Ende soll das Projekt sein:
+- [ ] User authentication
+- [ ] Cloud database (PostgreSQL)
+- [ ] FastAPI backend
+- [ ] Deployment (Docker / Cloud)
 
-- intelligenter Karriere-Assistent
-- portfolio-ready AI system
-- erweiterbar zu SaaS
-- real-world usable tool
+---
+
+# Architecture Summary
+
+```
+CV + Job → Embeddings → Semantic Search → LLM
+                      → Match Score Engine
+                      → Structured Output
+```
+
+---
+
+# Current Status
+
+The project is now a:
+
+**AI-powered Career Assistant (MVP+ with semantic search + scoring)**
+
+---
+
+# Next Milestone
+
+Upgrade Match Score Engine:
+
+👉 Skill-based scoring system (ATS-level intelligence)

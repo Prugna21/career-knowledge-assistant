@@ -1,15 +1,27 @@
-# Python Cache
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
 
-# Environment (falls später genutzt)
-.env
+# Virtual environment
 venv/
-.venv/
+.env/
 
-# Streamlit cache
+# Streamlit
 .streamlit/
 
-# OS Dateien
+# OS files
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Data / sensitive files
+data/cv/*.pdf
+data/*.json
+*.sqlite3
+
+# Logs
+*.log
