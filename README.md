@@ -1,28 +1,57 @@
 # Career Knowledge Assistant
 
-## Projektziel
+## Überblick
 
-Career Knowledge Assistant ist ein persönlicher AI-Assistent, der bei der Verwaltung von Wissen und Bewerbungen unterstützt.
+Der Career Knowledge Assistant ist ein persönliches AI-Tool zur Unterstützung bei Bewerbungen und Karriereplanung.
 
-Das Projekt dient dazu, praktische Erfahrungen mit künstlicher Intelligenz zu sammeln und ein nützliches Tool zu entwickeln.
+Er nutzt lokale KI-Modelle und eigene Dokumente (CV, Stellenanzeigen), um Fragen zu beantworten, Jobs zu analysieren und Lebensläufe zu optimieren.
 
-## Geplante Funktionen
+---
 
-- Dokumente durchsuchen
-- Fragen zu Dokumenten beantworten
-- Stellenanzeigen analysieren
-- Lebenslauf mit Stellenanzeigen vergleichen
-- Unterstützung beim Schreiben von Bewerbungen
-- Interviewvorbereitung
+## Funktionen
 
-## Projektstatus
+### 1. CV Q&A
+- Fragen zum eigenen Lebenslauf beantworten
+- z. B. Skills, Erfahrung, Ausbildung
 
-🚧 In Entwicklung
+### 2. Job Analyse
+- Vergleich von Lebenslauf und Stellenanzeige
+- Matching Score (0–100%)
+- Stärken & Lücken
 
-## Tech-Stack (geplant)
+### 3. CV Optimierung
+- Lebenslauf wird auf Stellenanzeige angepasst
+- ATS-freundliche Struktur
+
+---
+
+## Tech Stack
 
 - Python
-- GitHub
-- VS Code
-- OpenAI API oder lokales LLM
-- Streamlit (später)
+- Streamlit
+- Ollama (lokales LLM)
+- PDF Parsing (pypdf)
+- Simple RAG Pipeline
+
+---
+
+## Architektur
+
+```
+PDF → Text → Chunking → Suche → Prompt → LLM → Antwort
+```
+
+---
+
+## Ziel
+
+Dieses Projekt dient dazu:
+- praktische AI-Erfahrung zu sammeln
+- RAG-Systeme zu verstehen
+- ein echtes Portfolio-Projekt zu bauen
+
+---
+
+## Status
+
+🚧 In aktiver Entwicklung
