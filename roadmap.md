@@ -16,15 +16,11 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 ✔ Application tracking  
 ✔ PDF export  
 
----
-
 ## Phase 2 – Semantic AI Upgrade
 
 ✔ Embedding-based semantic search  
 ✔ RAG-style retrieval system  
 ✔ Improved context handling  
-
----
 
 ## Phase 3 – Product Features
 
@@ -37,21 +33,15 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 - [ ] Weighted evaluation (Experience / Skills / Education)
 - [ ] Skill gap detection
 
----
-
 ### Application System
 - [ ] Structured database (replace JSON)
 - [ ] Application statuses (Applied / Interview / Rejected)
 - [ ] Notes per application
 
----
-
 ### UI/UX Improvements
 - [ ] Better layout (tabs instead of selectbox)
 - [ ] Progress indicators for AI calls
 - [ ] Highlight matched skills
-
----
 
 ## Phase 4 – Advanced AI Features
 
@@ -61,16 +51,12 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 - [ ] Career path suggestions
 - [ ] Salary estimation insights
 
----
-
 ## Phase 5 – SaaS Evolution
 
 - [ ] User authentication
 - [ ] Cloud database (PostgreSQL)
 - [ ] FastAPI backend
 - [ ] Deployment (Docker / Cloud)
-
----
 
 ## Architecture Summary
 
@@ -79,8 +65,6 @@ CV + Job → Embeddings → Semantic Search → LLM
                       → Match Score Engine
                       → Structured Output
 ```
-
----
 
 ## Current Status
 
