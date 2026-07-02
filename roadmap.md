@@ -6,7 +6,7 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 1 – MVP
+## Phase 1 – MVP
 
 ✔ CV loading (PDF)  
 ✔ Text chunking  
@@ -18,7 +18,7 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 2 – Semantic AI Upgrade
+## Phase 2 – Semantic AI Upgrade
 
 ✔ Embedding-based semantic search  
 ✔ RAG-style retrieval system  
@@ -26,34 +26,34 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 3 – Product Features
+## Phase 3 – Product Features
 
-## Match Score Engine
+### Match Score Engine
 ✔ CV vs Job similarity scoring (0–100)  
 ✔ Explanation of match quality  
 
-## Next improvements:
+### Next improvements:
 - [ ] Skill-based scoring (not just similarity)
 - [ ] Weighted evaluation (Experience / Skills / Education)
 - [ ] Skill gap detection
 
 ---
 
-## Application System
+### Application System
 - [ ] Structured database (replace JSON)
 - [ ] Application statuses (Applied / Interview / Rejected)
 - [ ] Notes per application
 
 ---
 
-## UI/UX Improvements
+### UI/UX Improvements
 - [ ] Better layout (tabs instead of selectbox)
 - [ ] Progress indicators for AI calls
 - [ ] Highlight matched skills
 
 ---
 
-# Phase 4 – Advanced AI Features
+## Phase 4 – Advanced AI Features
 
 - [ ] Auto cover letter generation
 - [ ] Interview question generator
@@ -63,7 +63,7 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 5 – SaaS Evolution
+## Phase 5 – SaaS Evolution
 
 - [ ] User authentication
 - [ ] Cloud database (PostgreSQL)
@@ -72,7 +72,7 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Architecture Summary
+## Architecture Summary
 
 ```
 CV + Job → Embeddings → Semantic Search → LLM
@@ -82,7 +82,7 @@ CV + Job → Embeddings → Semantic Search → LLM
 
 ---
 
-# Current Status
+## Current Status
 
 The project is now a:
 
@@ -90,7 +90,7 @@ The project is now a:
 
 ---
 
-# Next Milestone
+## Next Milestone
 
 Upgrade Match Score Engine:
 
