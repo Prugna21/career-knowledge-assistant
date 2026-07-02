@@ -41,7 +41,7 @@ PDF → Text → Chunking → Embeddings → Semantic Search → LLM
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - Python
 - Streamlit
@@ -76,20 +76,7 @@ cv_optimizer.py
 cv_exporter.py
 app_state.py
 ```
-                 User
-                  │
-                  ▼
-          app/app_ui.py
-                  │
-      ┌───────────┼───────────┐
-      ▼           ▼           ▼
-semantic_search  match_engine  ai_engine
-      │           │             │
-      ▼           │             ▼
-pdf_reader ─► text_splitter   LLM (Ollama)
-      │
-      ▼
-      CV
+
 ---
 
 ## Current Status
