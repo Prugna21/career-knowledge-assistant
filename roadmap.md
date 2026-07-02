@@ -68,14 +68,4 @@ CV + Job → Embeddings → Semantic Search → LLM
 
 ## Current Status
 
-The project is now a:
-
 **AI-powered Career Assistant (MVP+ with semantic search + scoring)**
-
----
-
-## Next Milestone
-
-Upgrade Match Score Engine:
-
-👉 Skill-based scoring system (ATS-level intelligence)
