@@ -13,15 +13,19 @@ from match_engine import compute_match_score
 # -------------------
 # CV LOAD
 # -------------------
-cv_folder = Path("data/cv")
-pdf_files = list(cv_folder.glob("*.pdf"))
+cv_files = list(Path("data/cv").glob("*.pdf"))
+selected_cv = st.selectbox(
+    "Wähle deinen CV",
+    cv_files
+)
 
 if not pdf_files:
     st.error("Kein CV gefunden")
     st.stop()
 
-cv_text = read_pdf(pdf_files[0])
+cv_text = read_pdf(selected_cv)
 chunks = split_text(cv_text)
+chunk_embeddings = get_embeddings(chunks)
 
 
 # Cache embeddings (wichtig für Performance)
