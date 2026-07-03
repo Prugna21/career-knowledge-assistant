@@ -1,7 +1,6 @@
 import streamlit as st
 from pathlib import Path
 from datetime import datetime
-
 from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
@@ -60,10 +59,11 @@ with st.sidebar:
             st.info("No applications yet.")
         else:
             for i, app in enumerate(reversed(apps), start=1):
-                with st.expander(f"Application {i}"):
+                with st.expander(f"Application {i} - Score: {app.get('match_score', 'N/A')}"):
                     st.write(f"**Date:** {app.get('date')}")
-                    st.write(f"**Match:** {app.get('match_score', 'N/A')}")
-                    st.write(app.get("job_text", "")[:300] + "...")
+                    st.write(f"**Match Score:** {app.get('match_score', 'N/A')}")
+                    st.write("**Job Text:**")
+                    st.write(app.get("job_text", ""))
 
 # -------------------
 # MODE 1: CV QUESTION
@@ -85,7 +85,7 @@ if mode == "CV Frage":
             prompt = f"""
 Du bist ein präziser Karriere-Experte.
 
-Nutze ausschließlich den Kontext.
+Nutze ausschliesslich den Kontext.
 Wenn etwas fehlt, sage: "nicht im Lebenslauf enthalten".
 
 Antworte klar in Bullet Points.
