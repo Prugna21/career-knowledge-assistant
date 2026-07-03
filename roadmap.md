@@ -2,11 +2,11 @@
 
 ## 🎯 Vision
 
-Build an AI-powered career assistant that behaves like a mini ATS + recruiter system.
+Build an AI-powered career assistant that behaves like a mini recruiter system.
 
 ---
 
-# Phase 1 – MVP (DONE)
+## Phase 1 – MVP
 
 ✔ CV loading (PDF)  
 ✔ Text chunking  
@@ -16,44 +16,34 @@ Build an AI-powered career assistant that behaves like a mini ATS + recruiter sy
 ✔ Application tracking  
 ✔ PDF export  
 
----
-
-# Phase 2 – Semantic AI Upgrade (DONE)
+## Phase 2 – Semantic AI Upgrade
 
 ✔ Embedding-based semantic search  
 ✔ RAG-style retrieval system  
 ✔ Improved context handling  
 
----
+## Phase 3 – Product Features
 
-# Phase 3 – Product Features
-
-## Match Score Engine (DONE)
+### Match Score Engine
 ✔ CV vs Job similarity scoring (0–100)  
 ✔ Explanation of match quality  
 
-## Next improvements:
+### Next improvements:
 - [ ] Skill-based scoring (not just similarity)
 - [ ] Weighted evaluation (Experience / Skills / Education)
 - [ ] Skill gap detection
 
----
-
-## Application System
+### Application System
 - [ ] Structured database (replace JSON)
 - [ ] Application statuses (Applied / Interview / Rejected)
 - [ ] Notes per application
 
----
-
-## UI/UX Improvements
+### UI/UX Improvements
 - [ ] Better layout (tabs instead of selectbox)
 - [ ] Progress indicators for AI calls
 - [ ] Highlight matched skills
 
----
-
-# Phase 4 – Advanced AI Features
+## Phase 4 – Advanced AI Features
 
 - [ ] Auto cover letter generation
 - [ ] Interview question generator
@@ -61,18 +51,14 @@ Build an AI-powered career assistant that behaves like a mini ATS + recruiter sy
 - [ ] Career path suggestions
 - [ ] Salary estimation insights
 
----
-
-# Phase 5 – SaaS Evolution
+## Phase 5 – SaaS Evolution
 
 - [ ] User authentication
 - [ ] Cloud database (PostgreSQL)
 - [ ] FastAPI backend
 - [ ] Deployment (Docker / Cloud)
 
----
-
-# Architecture Summary
+## Architecture Summary
 
 ```
 CV + Job → Embeddings → Semantic Search → LLM
@@ -80,18 +66,6 @@ CV + Job → Embeddings → Semantic Search → LLM
                       → Structured Output
 ```
 
----
-
-# Current Status
-
-The project is now a:
+## Current Status
 
 **AI-powered Career Assistant (MVP+ with semantic search + scoring)**
-
----
-
-# Next Milestone
-
-Upgrade Match Score Engine:
-
-👉 Skill-based scoring system (ATS-level intelligence)

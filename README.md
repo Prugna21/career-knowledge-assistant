@@ -4,34 +4,34 @@ AI-powered career assistant for CV analysis, job matching, CV optimization and m
 
 ---
 
-## 🚀 Features
+## Features
 
-### 📄 CV Intelligence
+### CV Intelligence
 - Ask questions about your CV
 - Semantic search using embeddings
 - Context-aware AI answers
 
-### 💼 Job Analysis
+### Job Analysis
 - Analyze job descriptions vs CV
 - AI-generated structured feedback
 
-### 📊 CV Match Score (NEW)
+### CV Match Score
 - Calculates similarity between CV and job
 - Score from 0–100
 - Human-readable explanation of fit quality
 
-### ✨ CV Optimization
+### CV Optimization
 - Tailor CV to job descriptions
 - AI-generated improvements
 - Export optimized CV as PDF
 
-### 📦 Application Tracking
+### Application Tracking
 - Save job applications
 - View history in sidebar
 
 ---
 
-## 🧠 AI Architecture
+## AI Architecture
 
 ```
 PDF → Text → Chunking → Embeddings → Semantic Search → LLM
@@ -41,7 +41,7 @@ PDF → Text → Chunking → Embeddings → Semantic Search → LLM
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
 - Python
 - Streamlit
@@ -52,7 +52,7 @@ PDF → Text → Chunking → Embeddings → Semantic Search → LLM
 
 ---
 
-## ▶️ How to run
+## How to run
 
 ```bash
 pip install -r requirements.txt
@@ -61,7 +61,7 @@ streamlit run app/app_ui.py
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 app/
@@ -79,7 +79,7 @@ app_state.py
 
 ---
 
-## 🎯 Current Status
+## Current Status
 
 ✔ CV AI Assistant  
 ✔ Job Analysis Engine  
@@ -91,6 +91,6 @@ app_state.py
 
 ---
 
-## 🚀 Next Steps
+## Next Steps
 
 See 'roadmap.md'
