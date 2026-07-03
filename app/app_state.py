@@ -3,7 +3,7 @@ from pathlib import Path
 from datetime import datetime
 import uuid
 
-DB_FILE = Path("data/applications.json")
+DB_FILE = Path("data/jobs/applications.json")
 
 
 def load_applications():
