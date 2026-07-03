@@ -12,9 +12,7 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 ✔ Text chunking  
 ✔ Streamlit UI  
 ✔ Job analysis  
-✔ CV optimization  
 ✔ Application tracking  
-✔ PDF export  
 
 ## Phase 2 – Semantic AI Upgrade
 
@@ -32,6 +30,9 @@ Build an AI-powered career assistant that behaves like a mini recruiter system.
 - [ ] Skill-based scoring (not just similarity)
 - [ ] Weighted evaluation (Experience / Skills / Education)
 - [ ] Skill gap detection
+- [ ] AI CV Optimizer (structured Word/PDF output)
+- [ ] Cover Letter Generator
+- [ ] Interview Question Generator
 
 ### Application System
 - [ ] Structured database (replace JSON)

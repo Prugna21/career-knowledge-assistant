@@ -20,11 +20,6 @@ AI-powered career assistant for CV analysis, job matching, CV optimization and m
 - Score from 0–100
 - Human-readable explanation of fit quality
 
-### CV Optimization
-- Tailor CV to job descriptions
-- AI-generated improvements
-- Export optimized CV as PDF
-
 ### Application Tracking
 - Save job applications
 - View history in sidebar
@@ -81,13 +76,11 @@ app_state.py
 
 ## Current Status
 
-✔ CV AI Assistant  
-✔ Job Analysis Engine  
-✔ Semantic Search (Embeddings)  
-✔ CV Optimization System  
-✔ Match Score Engine (0–100)  
-✔ Application Tracking  
-✔ PDF Export  
+✓ CV Intelligence
+✓ Semantic Search
+✓ Job Analysis
+✓ CV Match Score
+✓ Application Tracking
 
 ---
 

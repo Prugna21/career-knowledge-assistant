@@ -5,9 +5,7 @@ from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
 from job_analyzer import build_job_prompt
-from cv_optimizer import build_cv_prompt
 from app_state import save_application, load_applications
-from cv_exporter import export_cv
 from semantic_search import build_index, search
 from match_engine import compute_match_score
 
@@ -38,7 +36,7 @@ st.title("Career Knowledge Assistant")
 
 mode = st.selectbox(
     "Modus wählen",
-    ["CV Frage", "Job Analyse", "CV Optimieren"]
+    ["CV Frage", "Job Analyse"]
 )
 
 
@@ -103,20 +101,3 @@ elif mode == "Job Analyse":
                 "job_text": job_text
             })
             st.success("Bewerbung gespeichert")
-
-# -------------------
-# MODE 3
-# -------------------
-elif mode == "CV Optimieren":
-    job_text = st.text_area("Stellenanzeige einfügen")
-
-    if st.button("CV optimieren"):
-        if job_text.strip():
-            result = ask_llm(build_cv_prompt(cv_text, job_text))
-            st.session_state["cv_answer"] = result
-            st.write(result)
-
-    if "cv_answer" in st.session_state:
-        if st.button("CV als PDF exportieren"):
-            path = export_cv(st.session_state["cv_answer"])
-            st.success(f"Gespeichert: {path}")
