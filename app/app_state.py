@@ -48,3 +48,11 @@ def update_application(app_id, updates: dict):
         json.dumps(data, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
+def delete_application(app_id):
+    data = load_applications()
+    data = [a for a in data if a.get("id") != app_id]
+
+    DB_FILE.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
