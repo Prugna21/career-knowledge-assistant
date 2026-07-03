@@ -27,14 +27,17 @@ def save_application(entry):
     )
 
 
-def delete_application(app_id):
-    data = load_applications()
-    data = [a for a in data if a.get("id") != app_id]
-
+def save_all(data):
     DB_FILE.write_text(
         json.dumps(data, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
+
+
+def delete_application(app_id):
+    data = load_applications()
+    data = [a for a in data if a.get("id") != app_id]
+    save_all(data)
 
 
 def update_application(app_id, updates: dict):

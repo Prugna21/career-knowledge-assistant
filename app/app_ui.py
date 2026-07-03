@@ -101,20 +101,18 @@ with st.sidebar:
     st.markdown("---")
 
     if st.button("📋 Show Applications"):
+        apps = load_applications()   # <- WICHTIG: frisch laden
+
         for i, app in enumerate(reversed(apps), start=1):
 
-            with st.expander(
-                f"Application {i} | Score: {app.get('match_score', 'N/A')}"
-            ):
+            with st.expander(f"Application {i} | Score: {app.get('match_score', 'N/A')}"):
                 st.write(f"**Date:** {app.get('date')}")
-
-                st.markdown("### Job Description")
                 st.write(app.get("job_text", ""))
 
                 app_id = app.get("id")
 
                 if app_id:
-                    if st.button("🗑️ Delete", key=app_id):
+                    if st.button("🗑️ Delete", key=f"del_{app_id}"):
                         delete_application(app_id)
                         st.rerun()
 
