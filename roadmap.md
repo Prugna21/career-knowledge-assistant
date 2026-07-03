@@ -1,4 +1,4 @@
-# Career Knowledge Assistant – Roadmap
+# CareerPilot AI – Product Roadmap
 
 ## 🎯 Vision
 
