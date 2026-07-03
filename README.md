@@ -67,8 +67,6 @@ pdf_reader.py
 text_splitter.py
 ai_engine.py
 job_analyzer.py
-cv_optimizer.py
-cv_exporter.py
 app_state.py
 ```
 
