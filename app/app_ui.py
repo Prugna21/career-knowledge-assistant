@@ -108,19 +108,20 @@ with st.sidebar:
     if st.button("📋 Show Applications"):
         apps = load_applications()
 
-        for i, app in enumerate(reversed(apps), start=1):
+        if not apps:
+            st.info("No applications saved yet.")
+        else:
+            for i, app in enumerate(reversed(apps), start=1):
+                app_id = app.get("id")
 
-            app_id = app.get("id")
+                with st.expander(f"Application {i} | Score: {app.get('match_score', 'N/A')}"):
+                    st.write(app.get("date"))
+                    st.write(app.get("job_text", ""))
 
-            with st.expander(f"Application {i} | Score: {app.get('match_score', 'N/A')}"):
-                st.write(app.get("date"))
-                st.write(app.get("job_text", ""))
-
-                if app_id:
-                    if st.button("🗑️ Delete", key=f"del_{app_id}"):
-                        delete_application(app_id)
-                        st.rerun()
-
+                    if app_id:
+                        if st.button("🗑️ Delete", key=f"del_{app_id}"):
+                            delete_application(app_id)
+                            st.rerun()
 
 # -------------------
 # TABS
@@ -192,6 +193,7 @@ with tab2:
                 st.session_state["last_job"] = job_text
 
                 st.markdown("### Match Score")
+                score = score or 0
                 st.metric("CV Match", f"{score}/100")
                 st.progress(score / 100)
 
