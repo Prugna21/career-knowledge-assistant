@@ -1,6 +1,7 @@
 import streamlit as st
 from pathlib import Path
 from datetime import datetime
+
 from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
@@ -11,7 +12,7 @@ from match_engine import compute_match_score
 
 
 # -------------------
-# CV laden
+# CV LOAD
 # -------------------
 cv_folder = Path("data/cv")
 pdf_files = list(cv_folder.glob("*.pdf"))
@@ -22,9 +23,13 @@ if not pdf_files:
 
 cv_text = read_pdf(pdf_files[0])
 chunks = split_text(cv_text)
+
+
+# Cache embeddings (wichtig für Performance)
 @st.cache_resource
 def get_embeddings(chunks):
-    return build_index(chunks)
+    return build_index(tuple(chunks))
+
 
 chunk_embeddings = get_embeddings(chunks)
 
@@ -34,6 +39,7 @@ chunk_embeddings = get_embeddings(chunks)
 # -------------------
 st.title("CareerPilot AI 🧭")
 st.caption("Your AI-powered career assistant.")
+
 
 mode = st.selectbox(
     "Modus wählen",
@@ -45,29 +51,44 @@ mode = st.selectbox(
 # SIDEBAR
 # -------------------
 with st.sidebar:
-    if st.button("📋 Bewerbungen anzeigen"):
-        apps = load_applications()
-        st.write(apps)
+    st.header("📋 Applications")
 
+    if st.button("Bewerbungen anzeigen"):
+        apps = load_applications()
+
+        if not apps:
+            st.info("No applications yet.")
+        else:
+            for i, app in enumerate(reversed(apps), start=1):
+                with st.expander(f"Application {i}"):
+                    st.write(f"**Date:** {app.get('date')}")
+                    st.write(f"**Match:** {app.get('match_score', 'N/A')}")
+                    st.write(app.get("job_text", "")[:300] + "...")
 
 # -------------------
-# MODE 1
+# MODE 1: CV QUESTION
 # -------------------
 if mode == "CV Frage":
     question = st.text_input("Frage zu deinem Lebenslauf")
 
     if st.button("Antwort generieren"):
         if question.strip():
-            relevant_chunks = search(question, chunks, chunk_embeddings, top_k=4)
+            relevant_chunks = search(
+                question,
+                chunks,
+                chunk_embeddings,
+                top_k=4
+            )
+
             context = "\n\n".join(relevant_chunks)
 
             prompt = f"""
 Du bist ein präziser Karriere-Experte.
 
-Arbeite nur mit dem gegebenen Kontext.
-Wenn etwas nicht vorhanden ist, sage "nicht im Lebenslauf enthalten".
+Nutze ausschließlich den Kontext.
+Wenn etwas fehlt, sage: "nicht im Lebenslauf enthalten".
 
-Gib strukturierte, klare Bullet Points.
+Antworte klar in Bullet Points.
 
 KONTEXT:
 {context}
@@ -80,25 +101,42 @@ FRAGE:
 
 
 # -------------------
-# MODE 2
+# MODE 2: JOB ANALYSIS
 # -------------------
 elif mode == "Job Analyse":
     job_text = st.text_area("Stellenanzeige einfügen")
 
+    # SESSION STATE
+    if "match_result" not in st.session_state:
+        st.session_state.match_result = None
+
     if st.button("Analyse starten"):
         if job_text.strip():
-            st.write(ask_llm(build_job_prompt(cv_text, job_text)))
+            result = ask_llm(build_job_prompt(cv_text, job_text))
+            st.write(result)
 
     if st.button("Match Score berechnen"):
         if job_text.strip():
             score, explanation = compute_match_score(cv_text, job_text)
-            st.metric("CV Match Score", f"{score}/100")
-            st.write(explanation)
+            st.session_state.match_result = (score, explanation)
+
+    if st.session_state.match_result:
+        score, explanation = st.session_state.match_result
+
+        st.metric("CV Match Score", f"{score}/100")
+        st.write(explanation)
 
     if st.button("Diese Bewerbung speichern"):
         if job_text.strip():
+
+            score = None
+            if st.session_state.match_result:
+                score = st.session_state.match_result[0]
+
             save_application({
                 "date": str(datetime.now()),
-                "job_text": job_text
+                "job_text": job_text,
+                "match_score": score
             })
+
             st.success("Bewerbung gespeichert")
