@@ -109,10 +109,12 @@ with st.sidebar:
     if st.button("📋 Show Applications"):
         for i, app in enumerate(reversed(apps), start=1):
             with st.expander(f"Application {i}"):
+
                 st.write(f"**Date:** {app.get('date')}")
                 st.write(f"**Score:** {app.get('match_score', 'N/A')}")
-                st.write(app.get("job_text", "")[:250] + "...")
 
+            with st.expander(f"Application {i}", expanded=False):
+                st.write(app.get("job_text", ""))
 
 
 # -------------------
@@ -126,7 +128,7 @@ tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 # ===================
 with tab1:
 
-    st.subheader("Ask your CV")
+    st.subheader("Ask about your CV")
 
     question = st.text_input("Ask a question about your CV")
 
