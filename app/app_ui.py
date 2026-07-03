@@ -107,14 +107,14 @@ with st.sidebar:
     st.markdown("---")
 
     if st.button("📋 Show Applications"):
-        for i, app in enumerate(reversed(apps), start=1):
-            with st.expander(f"Application {i}"):
+    for i, app in enumerate(reversed(apps), start=1):
+        with st.expander(
+            f"Application {i} | Score: {app.get('match_score', 'N/A')}"
+        ):
+            st.write(f"**Date:** {app.get('date')}")
 
-                st.write(f"**Date:** {app.get('date')}")
-                st.write(f"**Score:** {app.get('match_score', 'N/A')}")
-
-            with st.expander(f"Application {i}", expanded=False):
-                st.write(app.get("job_text", ""))
+            st.markdown("### Job Description")
+            st.write(app.get("job_text", ""))
 
 
 # -------------------
