@@ -1,12 +1,13 @@
 import streamlit as st
 from pathlib import Path
 from datetime import datetime
+import uuid
 
 from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
 from job_analyzer import build_job_prompt
-from app_state import save_application, load_applications, delete_application, update_application
+from app_state import save_application, load_applications, delete_application
 from semantic_search import build_index, search
 from match_engine import compute_match_score
 
@@ -21,24 +22,22 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+
 # -------------------
-# GLOBAL STYLING
+# STYLE
 # -------------------
 st.markdown("""
 <style>
 
-/* Background */
 .stApp {
     background-color: #0B0F19;
     color: #E5E7EB;
 }
 
-/* Sidebar */
 section[data-testid="stSidebar"] {
     background-color: #111827;
 }
 
-/* Buttons */
 .stButton button {
     background-color: #4F8BF9;
     color: white;
@@ -47,15 +46,9 @@ section[data-testid="stSidebar"] {
     border: none;
 }
 
-/* Expander */
 .streamlit-expanderHeader {
     font-weight: 600;
     color: #E5E7EB;
-}
-
-/* Metric styling */
-[data-testid="stMetricValue"] {
-    font-size: 22px;
 }
 
 </style>
@@ -66,7 +59,7 @@ section[data-testid="stSidebar"] {
 # HEADER
 # -------------------
 st.title("🧭 CareerPilot AI")
-st.caption("Your AI-powered career copilot")
+st.caption("AI-powered career assistant")
 
 
 # -------------------
@@ -78,6 +71,7 @@ pdf_files = list(cv_folder.glob("*.pdf"))
 if not pdf_files:
     st.error("No CV found in data/cv")
     st.stop()
+
 
 selected_cv = st.selectbox(
     "Select CV",
@@ -91,7 +85,7 @@ chunk_embeddings = build_index(chunks)
 
 
 # -------------------
-# SIDEBAR DASHBOARD
+# SIDEBAR
 # -------------------
 with st.sidebar:
     st.header("📊 Dashboard")
@@ -108,32 +102,35 @@ with st.sidebar:
 
     if st.button("📋 Show Applications"):
         for i, app in enumerate(reversed(apps), start=1):
+
             with st.expander(
-            f"Application {i} | Score: {app.get('match_score', 'N/A')}"
+                f"Application {i} | Score: {app.get('match_score', 'N/A')}"
             ):
                 st.write(f"**Date:** {app.get('date')}")
 
                 st.markdown("### Job Description")
                 st.write(app.get("job_text", ""))
 
-             # DELETE BUTTON
-            if st.button("🗑️ Delete", key=app["id"]):
-                delete_application(app["id"])
-                st.rerun()   
+                app_id = app.get("id")
+
+                if app_id:
+                    if st.button("🗑️ Delete", key=app_id):
+                        delete_application(app_id)
+                        st.rerun()
 
 
 # -------------------
-# MAIN TABS
+# TABS
 # -------------------
 tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 
 
 # ===================
-# TAB 1: CV INTELLIGENCE
+# TAB 1
 # ===================
 with tab1:
 
-    st.subheader("Ask about your CV")
+    st.subheader("Ask your CV")
 
     question = st.text_input("Ask a question about your CV")
 
@@ -147,7 +144,7 @@ with tab1:
 You are a precise career assistant.
 
 Use ONLY the context.
-If information is missing, say: "not found in CV".
+If information is missing say: "not found in CV".
 
 Return structured bullet points.
 
@@ -165,7 +162,7 @@ QUESTION:
 
 
 # ===================
-# TAB 2: JOB ANALYZER
+# TAB 2
 # ===================
 with tab2:
 
@@ -185,11 +182,14 @@ with tab2:
     with col2:
         if st.button("Compute Match Score"):
             if job_text.strip():
+
                 score, explanation = compute_match_score(cv_text, job_text)
+
+                st.session_state["last_score"] = score
+                st.session_state["last_job"] = job_text
 
                 st.markdown("### Match Score")
                 st.metric("CV Match", f"{score}/100")
-
                 st.progress(score / 100)
 
                 if score > 80:
@@ -201,20 +201,16 @@ with tab2:
 
                 st.write(explanation)
 
-
     st.markdown("---")
 
     if st.button("Save Application"):
         if job_text.strip():
 
-            score = None
-            if "score" in locals():
-                score = score
-
             save_application({
+                "id": str(uuid.uuid4()),
                 "date": str(datetime.now()),
                 "job_text": job_text,
-                "match_score": score
+                "match_score": st.session_state.get("last_score")
             })
 
             st.success("Application saved")
