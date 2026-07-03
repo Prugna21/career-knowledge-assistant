@@ -32,7 +32,8 @@ chunk_embeddings = get_embeddings(chunks)
 # -------------------
 # UI
 # -------------------
-st.title("Career Knowledge Assistant")
+st.title("CareerPilot AI 🧭")
+st.caption("Your AI-powered career assistant.")
 
 mode = st.selectbox(
     "Modus wählen",

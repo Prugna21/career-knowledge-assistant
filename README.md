@@ -1,6 +1,6 @@
-# Career Knowledge Assistant
+# CareerPilot AI
 
-AI-powered career assistant for CV analysis, job matching, CV optimization and match scoring.
+AI-powered career assistant for CV analysis, job matching and match scoring.
 
 ---
 
