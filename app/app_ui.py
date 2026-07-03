@@ -1,6 +1,7 @@
 import streamlit as st
 from pathlib import Path
 from datetime import datetime
+
 from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
@@ -11,139 +12,197 @@ from match_engine import compute_match_score
 
 
 # -------------------
-# UI
+# PAGE CONFIG
 # -------------------
-st.title("CareerPilot AI 🧭")
-st.caption("Your AI-powered career assistant.")
-
-
-mode = st.selectbox(
-    "Modus wählen",
-    ["CV Frage", "Job Analyse"]
+st.set_page_config(
+    page_title="CareerPilot AI",
+    page_icon="🧭",
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
 # -------------------
-# CV LOAD
+# GLOBAL STYLING
+# -------------------
+st.markdown("""
+<style>
+
+/* Background */
+.stApp {
+    background-color: #0B0F19;
+    color: #E5E7EB;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #111827;
+}
+
+/* Buttons */
+.stButton button {
+    background-color: #4F8BF9;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    border: none;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    font-weight: 600;
+    color: #E5E7EB;
+}
+
+/* Metric styling */
+[data-testid="stMetricValue"] {
+    font-size: 22px;
+}
+
+</style>
+""", unsafe_allow_html=True)
+
+
+# -------------------
+# HEADER
+# -------------------
+st.title("🧭 CareerPilot AI")
+st.caption("Your AI-powered career copilot")
+
+
+# -------------------
+# LOAD CV
 # -------------------
 cv_folder = Path("data/cv")
 pdf_files = list(cv_folder.glob("*.pdf"))
 
 if not pdf_files:
-    st.error("Kein CV gefunden im data/cv Ordner")
+    st.error("No CV found in data/cv")
     st.stop()
 
 selected_cv = st.selectbox(
-    "Wähle deinen CV",
+    "Select CV",
     pdf_files,
     format_func=lambda x: x.name
 )
 
 cv_text = read_pdf(selected_cv)
 chunks = split_text(cv_text)
+chunk_embeddings = build_index(chunks)
 
-
-@st.cache_resource
-def get_embeddings(chunks):
-    return build_index(tuple(chunks))
-
-
-chunk_embeddings = get_embeddings(chunks)
-
-
-# Cache embeddings (wichtig für Performance)
-@st.cache_resource
-def get_embeddings(chunks):
-    return build_index(tuple(chunks))
-
-
-chunk_embeddings = get_embeddings(chunks)
 
 # -------------------
-# SIDEBAR
+# SIDEBAR DASHBOARD
 # -------------------
 with st.sidebar:
-    st.header("📋 Applications")
+    st.header("📊 Dashboard")
 
-    if st.button("Bewerbungen anzeigen"):
-        apps = load_applications()
+    apps = load_applications()
 
-        if not apps:
-            st.info("No applications yet.")
-        else:
-            for i, app in enumerate(reversed(apps), start=1):
-                with st.expander(f"Application {i} - Score: {app.get('match_score', 'N/A')}"):
-                    st.write(f"**Date:** {app.get('date')}")
-                    st.write(f"**Match Score:** {app.get('match_score', 'N/A')}")
-                    st.write("**Job Text:**")
-                    st.write(app.get("job_text", ""))
+    st.metric("Applications", len(apps))
+
+    if apps:
+        avg_score = sum([a.get("match_score", 0) or 0 for a in apps]) / len(apps)
+        st.metric("Avg Match Score", f"{avg_score:.1f}/100")
+
+    st.markdown("---")
+
+    if st.button("📋 Show Applications"):
+        for i, app in enumerate(reversed(apps), start=1):
+            with st.expander(f"Application {i}"):
+                st.write(f"**Date:** {app.get('date')}")
+                st.write(f"**Score:** {app.get('match_score', 'N/A')}")
+                st.write(app.get("job_text", "")[:250] + "...")
+
+
 
 # -------------------
-# MODE 1: CV QUESTION
+# MAIN TABS
 # -------------------
-if mode == "CV Frage":
-    question = st.text_input("Frage zu deinem Lebenslauf")
+tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 
-    if st.button("Antwort generieren"):
+
+# ===================
+# TAB 1: CV INTELLIGENCE
+# ===================
+with tab1:
+
+    st.subheader("Ask your CV")
+
+    question = st.text_input("Ask a question about your CV")
+
+    if st.button("Generate Answer"):
         if question.strip():
-            relevant_chunks = search(
-                question,
-                chunks,
-                chunk_embeddings,
-                top_k=4
-            )
 
+            relevant_chunks = search(question, chunks, chunk_embeddings, top_k=4)
             context = "\n\n".join(relevant_chunks)
 
             prompt = f"""
-Du bist ein präziser Karriere-Experte.
+You are a precise career assistant.
 
-Nutze ausschliesslich den Kontext.
-Wenn etwas fehlt, sage: "nicht im Lebenslauf enthalten".
+Use ONLY the context.
+If information is missing, say: "not found in CV".
 
-Antworte klar in Bullet Points.
+Return structured bullet points.
 
-KONTEXT:
+CONTEXT:
 {context}
 
-FRAGE:
+QUESTION:
 {question}
 """
 
-            st.write(ask_llm(prompt))
+            answer = ask_llm(prompt)
+
+            st.markdown("### Answer")
+            st.write(answer)
 
 
-# -------------------
-# MODE 2: JOB ANALYSIS
-# -------------------
-elif mode == "Job Analyse":
-    job_text = st.text_area("Stellenanzeige einfügen")
+# ===================
+# TAB 2: JOB ANALYZER
+# ===================
+with tab2:
 
-    # SESSION STATE
-    if "match_result" not in st.session_state:
-        st.session_state.match_result = None
+    st.subheader("Job Analysis & Match Score")
 
-    if st.button("Analyse starten"):
-        if job_text.strip():
-            result = ask_llm(build_job_prompt(cv_text, job_text))
-            st.write(result)
+    job_text = st.text_area("Paste job description")
 
-    if st.button("Match Score berechnen"):
-        if job_text.strip():
-            score, explanation = compute_match_score(cv_text, job_text)
-            st.session_state.match_result = (score, explanation)
+    col1, col2 = st.columns(2)
 
-    if st.session_state.match_result:
-        score, explanation = st.session_state.match_result
+    with col1:
+        if st.button("Analyze Job"):
+            if job_text.strip():
+                result = ask_llm(build_job_prompt(cv_text, job_text))
+                st.markdown("### Analysis")
+                st.write(result)
 
-        st.metric("CV Match Score", f"{score}/100")
-        st.write(explanation)
+    with col2:
+        if st.button("Compute Match Score"):
+            if job_text.strip():
+                score, explanation = compute_match_score(cv_text, job_text)
 
-    if st.button("Diese Bewerbung speichern"):
+                st.markdown("### Match Score")
+                st.metric("CV Match", f"{score}/100")
+
+                st.progress(score / 100)
+
+                if score > 80:
+                    st.success("Strong match")
+                elif score > 50:
+                    st.warning("Medium match")
+                else:
+                    st.error("Weak match")
+
+                st.write(explanation)
+
+
+    st.markdown("---")
+
+    if st.button("Save Application"):
         if job_text.strip():
 
             score = None
-            if st.session_state.match_result:
-                score = st.session_state.match_result[0]
+            if "score" in locals():
+                score = score
 
             save_application({
                 "date": str(datetime.now()),
@@ -151,4 +210,4 @@ elif mode == "Job Analyse":
                 "match_score": score
             })
 
-            st.success("Bewerbung gespeichert")
+            st.success("Application saved")
