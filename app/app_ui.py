@@ -7,7 +7,7 @@ from pdf_reader import read_pdf
 from text_splitter import split_text
 from ai_engine import ask_llm
 from job_analyzer import build_job_prompt
-from app_state import save_application, load_applications, delete_application
+from app_state import DB_FILE
 from semantic_search import build_index, search
 from match_engine import compute_match_score
 
