@@ -11,6 +11,18 @@ from match_engine import compute_match_score
 
 
 # -------------------
+# UI
+# -------------------
+st.title("CareerPilot AI 🧭")
+st.caption("Your AI-powered career assistant.")
+
+
+mode = st.selectbox(
+    "Modus wählen",
+    ["CV Frage", "Job Analyse"]
+)
+
+# -------------------
 # CV LOAD
 # -------------------
 cv_folder = Path("data/cv")
@@ -45,20 +57,6 @@ def get_embeddings(chunks):
 
 
 chunk_embeddings = get_embeddings(chunks)
-
-
-# -------------------
-# UI
-# -------------------
-st.title("CareerPilot AI 🧭")
-st.caption("Your AI-powered career assistant.")
-
-
-mode = st.selectbox(
-    "Modus wählen",
-    ["CV Frage", "Job Analyse"]
-)
-
 
 # -------------------
 # SIDEBAR
