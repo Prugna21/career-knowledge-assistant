@@ -85,8 +85,14 @@ selected_cv = st.selectbox(
 )
 
 cv_text = read_pdf(selected_cv)
-chunks = split_text(cv_text)
-chunk_embeddings = build_index(chunks)
+
+@st.cache_resource
+def prepare_cv(cv_text):
+    chunks = split_text(cv_text)
+    embeddings = build_index(chunks)
+    return chunks, embeddings
+
+chunks, chunk_embeddings = prepare_cv(cv_text)
 
 
 # -------------------
@@ -134,7 +140,7 @@ tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 # ===================
 with tab1:
 
-    st.subheader("Ask your CV")
+    st.subheader("Ask about your CV")
 
     question = st.text_input("Ask a question about your CV")
 
