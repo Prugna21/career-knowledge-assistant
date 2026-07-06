@@ -70,7 +70,7 @@ cv_folder = Path("data/cv")
 pdf_files = list(cv_folder.glob("*.pdf"))
 
 if not pdf_files:
-    st.error("No CV found in data/cv")
+    st.error("No file found in data/cv")
     st.stop()
 
 
@@ -134,7 +134,7 @@ tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 
 with tab1:
 
-    st.subheader("Ask about your CV")
+    st.subheader("CV Insights")
 
     question = st.text_input("Ask a question about your CV")
 
@@ -169,7 +169,7 @@ QUESTION:
 
 with tab2:
 
-    st.subheader("Job Analysis & Match Score")
+    st.subheader("Job Analysis and Match Score")
 
     job_text = st.text_area("Paste job description")
 
