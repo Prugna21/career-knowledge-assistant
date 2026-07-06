@@ -17,9 +17,8 @@ from semantic_search import build_index, search
 from match_engine import compute_match_score
 
 
-# -------------------
 # PAGE CONFIG
-# -------------------
+
 st.set_page_config(
     page_title="CareerPilot AI",
     page_icon="🧭",
@@ -28,9 +27,8 @@ st.set_page_config(
 )
 
 
-# -------------------
 # STYLE
-# -------------------
+
 st.markdown("""
 <style>
 
@@ -60,16 +58,14 @@ section[data-testid="stSidebar"] {
 """, unsafe_allow_html=True)
 
 
-# -------------------
 # HEADER
-# -------------------
+
 st.title("🧭 CareerPilot AI")
 st.caption("AI-powered career assistant")
 
 
-# -------------------
 # LOAD CV
-# -------------------
+
 cv_folder = Path("data/cv")
 pdf_files = list(cv_folder.glob("*.pdf"))
 
@@ -95,9 +91,8 @@ def prepare_cv(cv_text):
 chunks, chunk_embeddings = prepare_cv(cv_text)
 
 
-# -------------------
 # SIDEBAR
-# -------------------
+
 with st.sidebar:
     st.header("📊 Dashboard")
 
@@ -129,15 +124,14 @@ with st.sidebar:
                             delete_application(app_id)
                             st.rerun()
 
-# -------------------
+
 # TABS
-# -------------------
+
 tab1, tab2 = st.tabs(["CV Intelligence", "Job Analyzer"])
 
 
-# ===================
 # TAB 1
-# ===================
+
 with tab1:
 
     st.subheader("Ask about your CV")
@@ -171,9 +165,8 @@ QUESTION:
             st.write(answer)
 
 
-# ===================
 # TAB 2
-# ===================
+
 with tab2:
 
     st.subheader("Job Analysis & Match Score")
