@@ -1,15 +1,29 @@
-def split_text(text, chunk_size=800):
-    chunks = []
-    current_chunk = ""
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-    for line in text.split("\n"):
-        if len(current_chunk) + len(line) < chunk_size:
-            current_chunk += line + "\n"
-        else:
-            chunks.append(current_chunk)
-            current_chunk = line + "\n"
 
-    if current_chunk:
-        chunks.append(current_chunk)
+def split_text(text, chunk_size=800, chunk_overlap=150):
+    """
+    Splits a document into overlapping chunks for semantic search.
 
-    return chunks
+    Args:
+        text (str): Complete document text.
+        chunk_size (int): Maximum characters per chunk.
+        chunk_overlap (int): Number of overlapping characters.
+
+    Returns:
+        list[str]: List of text chunks.
+    """
+
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=chunk_overlap,
+        separators=[
+            "\n\n",   # Paragraphs
+            "\n",     # New lines
+            ". ",     # Sentences
+            " ",      # Words
+            ""        # Characters (fallback)
+        ]
+    )
+
+    return splitter.split_text(text)

@@ -1,7 +1,7 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
+model = SentenceTransformer("all-MiniLM-L6-v2") # https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2
 
 
 def compute_match_score(cv_text, job_text):
@@ -15,6 +15,7 @@ def compute_match_score(cv_text, job_text):
 
     cv_emb = embeddings[0]
     job_emb = embeddings[1]
+
 
     # cosine similarity
     similarity = np.dot(cv_emb, job_emb) / (
