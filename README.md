@@ -57,9 +57,8 @@ Upload your CV (PDF) and interact with it like a knowledge base:
  LLM (Ollama / local model)
         ↓
  Insights / Answers / Analysis
-
-                ↓
-      Match Score Engine (0–100)
+        ↓
+  Match Score Engine (0–100)
 ```
 
 ## Tech Stack

@@ -1,72 +1,26 @@
-# CareerPilot AI – Product Roadmap
+## Roadmap
 
-## 🎯 Vision
+### Phase 1 – Advanced AI Features
+- Multi-CV profiles (switch between CVs)
+- CV version comparison (before/after optimization)
+- Improved prompt engineering for job analysis
 
-Build an AI-powered career assistant that behaves like a mini recruiter system.
+### Phase 2 – Performance & Scaling
+- FAISS vector database for faster semantic search
+- Persistent embeddings storage (no recomputation)
+- Async LLM calls for smoother UX
 
----
+### Phase 3 – User System
+- User authentication
+- Saved profiles per user
+- Personal job history dashboard
 
-## Phase 1 – MVP
+### Phase 4 – AI Enhancements
+- Job recommendation engine
+- Skill extraction from CV (structured JSON)
+- ATS score simulation (Applicant Tracking System compatibility)
 
-✔ CV loading (PDF)  
-✔ Text chunking  
-✔ Streamlit UI  
-✔ Job analysis  
-✔ Application tracking  
-
-## Phase 2 – Semantic AI Upgrade
-
-✔ Embedding-based semantic search  
-✔ RAG-style retrieval system  
-✔ Improved context handling  
-
-## Phase 3 – Product Features
-
-### Match Score Engine
-✔ CV vs Job similarity scoring (0–100)  
-✔ Explanation of match quality  
-
-### Next improvements:
-- [ ] Skill-based scoring (not just similarity)
-- [ ] Weighted evaluation (Experience / Skills / Education)
-- [ ] Skill gap detection
-- [ ] AI CV Optimizer (structured Word/PDF output)
-- [ ] Cover Letter Generator
-- [ ] Interview Question Generator
-
-### Application System
-- [ ] Structured database (replace JSON)
-- [ ] Application statuses (Applied / Interview / Rejected)
-- [ ] Notes per application
-
-### UI/UX Improvements
-- [ ] Better layout (tabs instead of selectbox)
-- [ ] Progress indicators for AI calls
-- [ ] Highlight matched skills
-
-## Phase 4 – Advanced AI Features
-
-- [ ] Auto cover letter generation
-- [ ] Interview question generator
-- [ ] Job comparison system
-- [ ] Career path suggestions
-- [ ] Salary estimation insights
-
-## Phase 5 – SaaS Evolution
-
-- [ ] User authentication
-- [ ] Cloud database (PostgreSQL)
-- [ ] FastAPI backend
-- [ ] Deployment (Docker / Cloud)
-
-## Architecture Summary
-
-```
-CV + Job → Embeddings → Semantic Search → LLM
-                      → Match Score Engine
-                      → Structured Output
-```
-
-## Current Status
-
-**AI-powered Career Assistant (MVP+ with semantic search + scoring)**
+### Phase 5 – Export & Integration
+- AI-generated CV export (PDF improvement version)
+- LinkedIn profile optimization
+- Cover letter generator
