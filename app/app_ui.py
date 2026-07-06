@@ -86,6 +86,9 @@ def prepare_cv(cv_text):
 
 chunks, chunk_embeddings = prepare_cv(cv_text)
 
+st.success(f"Uploaded: {uploaded_cv.name}")
+st.write(f"Size: {uploaded_cv.size / 1024:.1f} KB")
+
 
 # SIDEBAR
 
