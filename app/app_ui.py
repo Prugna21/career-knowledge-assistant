@@ -64,29 +64,25 @@ st.title("🧭 CareerPilot AI")
 st.caption("AI-powered career assistant")
 
 
-# LOAD CV
+# UPLOAD CV
 
-cv_folder = Path("data/cv")
-pdf_files = list(cv_folder.glob("*.pdf"))
+uploaded_cv = st.file_uploader("Upload your CV (PDF)", type=["pdf"])
 
-if not pdf_files:
-    st.error("No file found in data/cv")
+if uploaded_cv is None:
+    st.info("Please upload a CV to continue.")
     st.stop()
 
+cv_text = read_pdf(uploaded_cv)
 
-selected_cv = st.selectbox(
-    "Select CV",
-    pdf_files,
-    format_func=lambda x: x.name
-)
-
-cv_text = read_pdf(selected_cv)
+chunks = split_text(cv_text)
+chunk_embeddings = build_index(chunks)
 
 @st.cache_resource
 def prepare_cv(cv_text):
     chunks = split_text(cv_text)
     embeddings = build_index(chunks)
     return chunks, embeddings
+
 
 chunks, chunk_embeddings = prepare_cv(cv_text)
 
