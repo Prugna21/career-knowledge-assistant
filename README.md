@@ -67,14 +67,14 @@ Upload your CV (PDF) and interact with it like a knowledge base:
 * Streamlit (UI)
 * SentenceTransformers (Embeddings)
 * NumPy (Similarity computation)
-* Ollama (Local LLM)
+* Ollama (Local LLM) -- needed!
 * pypdf (PDF parsing)
 * Requests (API communication)
 * ReportLab (PDF export)
 * LangChain Text Splitters (optional)
 
 
-## ▶Getting Started
+## Getting Started
 
 ```bash
 # 1. Install dependencies
