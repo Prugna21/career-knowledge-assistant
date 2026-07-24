@@ -30,7 +30,7 @@ def compute_match_score(cv_text, job_text):
     return round(score, 1), explanation
 
 
-def generate_explanation(score):
+def generate_explanation(score): #numerical similarity score using embeddings and cosine similarity --> objective measure how semantically similar the CV is to the job description
     if score > 80:
         return "Sehr guter Fit zwischen CV und Job."
     elif score > 60:
